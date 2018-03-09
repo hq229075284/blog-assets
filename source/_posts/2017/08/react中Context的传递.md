@@ -50,6 +50,8 @@ export default App
 
 ```
 
+<!-- more -->
+
 ```javascript
 // Parent
 import React from "react";
