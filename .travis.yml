@@ -10,7 +10,7 @@ script:
   git config user.name "travis script"
   git add .
   git commit -m 'Update blog'
-  git push http://${github-token}@${github-repo}
+  git push https://$github_token@$github_repo
 
 # deploy:
 #   provider: pages
@@ -22,6 +22,6 @@ script:
 
 env:
   global:
-    github-token: 1f76a2b22f707eea44517202f160deb60afc31d4
-    github-repo: github.com:hq229075284/blog.git
+    github_token: 1f76a2b22f707eea44517202f160deb60afc31d4
+    github_repo: github.com:hq229075284/blog.git
   
