@@ -1,0 +1,11 @@
+before install: hexo clean
+
+script: npm run deploy
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: 1f76a2b22f707eea44517202f160deb60afc31d4
+  keep-history: true
+  on:
+    branch: master
