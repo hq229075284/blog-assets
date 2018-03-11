@@ -1,6 +1,10 @@
 language: node_js
 node_js: lts/*
 
+cache:
+  directories:
+    - "node_modules"
+    
 before install: hexo clean
 
 script: 
@@ -10,8 +14,8 @@ script:
   - git config user.name "travis script"
   - git add .
   - git commit -m 'Update blog'
-  - echo $github_token@$github_repo
-  - git push https://$github_token@$github_repo
+  - echo {$github_token}@{$github_repo}
+  - git push https://$github_token@$github_repo master
 
 # deploy:
 #   provider: pages
