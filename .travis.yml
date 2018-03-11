@@ -3,12 +3,25 @@ node_js: lts/*
 
 before install: hexo clean
 
-script: npm run deploy
+script: 
+  hexo generate
+  cd ./public
+  git init
+  git config user.name "travis script"
+  git add .
+  git commit -m 'Update blog'
+  git push ${github-token}@${github-repo}
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: 1f76a2b22f707eea44517202f160deb60afc31d4
-  keep-history: true
-  on:
-    branch: master
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: 1f76a2b22f707eea44517202f160deb60afc31d4
+#   keep-history: true
+#   on:
+#     branch: master
+
+env:
+  global:
+    github-token: 1f76a2b22f707eea44517202f160deb60afc31d4
+    github-repo: github.com:hq229075284/blog.git
+  
