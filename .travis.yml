@@ -20,13 +20,12 @@ script:
 # deploy:
 #   provider: pages
 #   skip-cleanup: true
-#   github-token: 1f76a2b22f707eea44517202f160deb60afc31d4
+#   github-token: 0f3763b47e0cc44ceafd458ee3f975692fe93eb4
 #   keep-history: true
 #   on:
 #     branch: master
 
 env:
   global:
-    github_token: 1f76a2b22f707eea44517202f160deb60afc31d4
     github_repo: github.com:hq229075284/blog.git
   
