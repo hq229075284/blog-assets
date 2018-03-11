@@ -4,14 +4,14 @@ node_js: lts/*
 before install: hexo clean
 
 script: 
-  hexo generate
-  cd ./public
-  git init
-  git config user.name "travis script"
-  git add .
-  git commit -m 'Update blog'
-  echo $github_token@$github_repo
-  git push https://$github_token@$github_repo
+  - hexo generate
+  - cd ./public
+  - git init
+  - git config user.name "travis script"
+  - git add .
+  - git commit -m 'Update blog'
+  - echo $github_token@$github_repo
+  - git push https://$github_token@$github_repo
 
 # deploy:
 #   provider: pages
