@@ -15,7 +15,7 @@ customize:
         url: images/logo.png
     profile:
         enabled: true # Whether to show profile bar
-        avatar: http://oy5r4qgqf.bkt.clouddn.com/%E7%9A%AE%E5%8D%A1%E4%B8%98%E5%A4%B4%E5%83%8F.jpg
+        avatar: images/IMG_0049.JPG
         gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
         author: HanQ
         author_title: Web Developer & Node Developer
