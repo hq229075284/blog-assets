@@ -151,7 +151,7 @@ function Model(vm) {
 }
 // viewmodel
 function ViewModel() {
-  var model, view, needResponse = true
+  var model, view, needRespond = true
   this.init = function () {
     view = new View(this)
     model = new Model(this)
@@ -161,7 +161,7 @@ function ViewModel() {
     model.change(e.target.value)
   }
   this.notify = function (nextValue) {
-    if (needResponse) {
+    if (needRespond) {
       console.log('new value:', nextValue)
       view.render(model)
     }
