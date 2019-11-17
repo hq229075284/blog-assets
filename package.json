@@ -6,7 +6,9 @@
     "version": "3.9.0"
   },
   "scripts": {
-    "deploy": "hexo clean && hexo generate && hexo deploy"
+    "prepare":"hexo clean && hexo generate",
+    "server":"npm run prepare && hexo server",
+    "deploy": "npm run prepare && hexo deploy"
   },
   "dependencies": {
     "hexo": "^3.6.0",
