@@ -13,6 +13,7 @@ tags:
   - [MutationObserver注意点](#mutationobserver%e6%b3%a8%e6%84%8f%e7%82%b9)
   - [容器出现滚动条时，子容器的宽度是否因为滚动条而改变](#%e5%ae%b9%e5%99%a8%e5%87%ba%e7%8e%b0%e6%bb%9a%e5%8a%a8%e6%9d%a1%e6%97%b6%e5%ad%90%e5%ae%b9%e5%99%a8%e7%9a%84%e5%ae%bd%e5%ba%a6%e6%98%af%e5%90%a6%e5%9b%a0%e4%b8%ba%e6%bb%9a%e5%8a%a8%e6%9d%a1%e8%80%8c%e6%94%b9%e5%8f%98)
   - [webpack 多线程和cache优化](#webpack-%e5%a4%9a%e7%ba%bf%e7%a8%8b%e5%92%8ccache%e4%bc%98%e5%8c%96)
+  - [其他记录-以后分类](#%e5%85%b6%e4%bb%96%e8%ae%b0%e5%bd%95-%e4%bb%a5%e5%90%8e%e5%88%86%e7%b1%bb)
 
 <!-- /TOC -->
 
@@ -114,3 +115,9 @@ setTimeout(()=>{
 | hard-source-webpack-plugin（缺乏维护） | 54447          | 42747          |
 
 > `cache-loader`、`thread-loader`优化不明显，后期再看看
+
+## 其他记录-以后分类
+
++ absolute定位将relative定位的父级的padding区域左上角视为原点
++ 在无relaitve父级的情况下，将window窗口的左上角视为原点
++ DOM中ELEMENT元素在动画和过渡的过程中，通过`getClientRects`获取的ELEMENT元素位置信息是实时的，在变化的过程中会持续改变
