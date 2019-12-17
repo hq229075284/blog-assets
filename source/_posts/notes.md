@@ -121,3 +121,41 @@ setTimeout(()=>{
 + absolute定位将relative定位的父级的padding区域左上角视为原点
 + 在无relaitve父级的情况下，将window窗口的左上角视为原点
 + DOM中ELEMENT元素在动画和过渡的过程中，通过`getClientRects`获取的ELEMENT元素位置信息是实时的，在变化的过程中会持续改变
++ vue组件实例的\$vnode对象等同于相应插槽中的相应插槽位置的对象，比如：
+```
+exampleVueComponent.$vnode === this.$slots.default[0] // true
+```
++ vue实例的`$destroy`函数不会删除对应组件的节点，仅用于同步且按顺序触发`beforeDestroy `和`destroyed`这两个hook,，示例：
+
+```javascript
+const comp1 = {
+    mounted() {
+        console.log(window.b = this.$slots.default[0])
+    },
+    render(h) {
+        return h('div', {}, this.$slots.default)
+    }
+}
+const comp2 = {
+    beforeDestroy() { console.log('beforeDestroy'); return new Promise(() => { }) },
+    destroyed() { console.log('destroyed') },
+    render(h) {
+        return h('h2', {}, ['has a h2'])
+    }
+}
+new Vue({
+    el: '#app',
+    render(h) {
+        return h('comp1', {}, [h('comp2', { ref: 'comp2' })])
+    },
+    mounted() {
+        console.log(window.a = this.$refs.comp2)
+        this.$refs.comp2.$destroy();
+        console.log('h2 remove')
+    },
+    components: {
+        comp1,
+        comp2,
+    },
+})
+```
