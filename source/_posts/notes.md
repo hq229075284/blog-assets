@@ -127,6 +127,9 @@ exampleVueComponent.$vnode === this.$slots.default[0] // true
 ```
 + vue实例的`$destroy`函数不会删除对应组件的节点，仅用于同步且按顺序触发`beforeDestroy `和`destroyed`这两个hook,，示例：
 
+```html
+<div id="app"></div>
+```
 ```javascript
 const comp1 = {
     mounted() {
