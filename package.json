@@ -6,8 +6,8 @@
     "version": "3.9.0"
   },
   "scripts": {
-    "_prepare":"hexo clean && hexo generate",
-    "server":"hexo server",
+    "_prepare": "hexo clean && hexo generate",
+    "server": "hexo server",
     "deploy": "npm run _prepare && hexo deploy"
   },
   "dependencies": {
