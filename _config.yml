@@ -33,8 +33,8 @@ default_layout: draft
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
-render_drafts: true
-post_asset_folder: true
+render_drafts: false # Display drafts
+post_asset_folder: false # Enable the Asset Folder
 relative_link: false
 future: true
 highlight:

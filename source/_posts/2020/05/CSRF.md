@@ -1,8 +1,11 @@
 ---
 title: CSRF
 categories: web安全
-banner: /blog/2020/01/CSRF/csrf.png
+banner: /blog/2020/05/CSRF/csrf.png
+date: 2020-05-31 13:50:03
+tags:
 ---
+
 
 # CSRF
 
