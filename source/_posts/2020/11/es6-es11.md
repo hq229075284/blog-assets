@@ -16,6 +16,7 @@ tags:
 |[ECMAScript2018](#ECMAScript2018)|[ECMAScript9](#ECMAScript2018)|-|  
 |[ECMAScript2019](#ECMAScript2019)|[ECMAScript10](#ECMAScript2019)|-|
 |[ECMAScript2020](#ECMAScript2020)|[ECMAScript11](#ECMAScript2020)|-|
+|[ECMAScript2021](#ECMAScript2021)|[ECMAScript12](#ECMAScript2021)|-|
 
 ## ECMAScript2016
 
@@ -129,10 +130,85 @@ tags:
 
 ## ECMAScript2019
 
-- Array.prototype.includes
-- `**`替代`Math.pow`实现指数的计算
-
+- String.prototype.trimStart()
+- String.prototype.trimEnd()
+- Object.fromEntries()
+- Array.prototype.flat()
+- Array.prototype.flatMap()
+- try-catch中`catch`的参数改为可选
+- Symbol.prototype.description输出`Symbol`类型变量的描述
+- Array.prototype.sort()，在原来的基础上使用稳定的排序算法，尤其在对象数组中，会根据给定的键之间比较进行排序，同键值的多个对象的顺序与这些对象在原数组中的顺序一致
+- Function.prototype.toString(),将返回函数的注释、空格和语法详细信息
+- JSON成为ECMAScript的完全子集，可解析之前解析不了的JSON字符串：行分隔符（`\u2028`）和段分隔符（`\u2029`）
+- JSON.stringify()输出进行了优化，原来显示未知的字符，现在在字符代码之前插入`\`字符后仍能保持可读性
+  
+  ```javascript
+  // before
+  JSON.stringify('\uD83D');// '"�"'
+  
+  // after
+  JSON.stringify('\uD83D');// '"\\ud83d"'
+  ```
+  
 ## ECMAScript2020
 
-- Array.prototype.includes
-- `**`替代`Math.pow`实现指数的计算
+- 在变量名前加`#`，来定义类私有变量
+  
+  ```javascript
+  class a{
+    #p='private'
+    print(){
+      console.log(this.#p)
+    }
+  }
+  
+  var aa=new a
+
+  // 正常
+  aa.print() // 'private
+  
+  // 异常
+  // Uncaught SyntaxError: Private field '#p' must be declared in an enclosing class
+  console.log(aa.#p)
+  ```
+
+- `?.`可选链运算符,符号左侧的值为`undefined`或`null`时，运算表达式返回`undefined`,否则继续执行后续的操作
+
+  ```javascript
+  // 形式：
+  obj?.prop
+  obj?.[expr]
+  arr?.[index]
+  func?.(args)
+  ```
+
+- `??`空值合并运算符,运算符左侧为`undefined`或`null`时，取符号右侧的值，否则取左侧的值
+- 动态引入，`import('some.js').then(...)`
+- Promise.allSettled，处理多个Promise对象的集合，无论这些Promise对象的状态怎么变化，都会被记录下来，并在所有Promise状态发生变化后，执行then回调，入参为每个Promise状态的集合
+- globalThis
+- BigInt，通过在数字后面添加`n`来指定数的类型为BigInt,此类型用于处理大于(2^53 - 1)的整数，不可与普通number类型的数据进行操作，但可比较大小
+
+  ```javascript
+  11n+11 // Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
+  ```
+
+- String.prototype.matchAll，返回的是一个可迭代对象，可以通过for-of访问每一个匹配组的结果（包含使用括号定义的捕获组信息）
+
+## ECMAScript2021
+
+- String.prototype.replaceAll
+- Promise.any
+
+  ```javascript
+  Promise.any(promises).then(
+    (first) => {
+      // 任何一个 Promise 完成了
+    },
+    (error) => {
+      // 所有的 Promise 都拒绝了
+    }
+  )
+  ```
+
+- 数字分隔符`_`,`let x=2_3333`等价于`let x=23333`
+- [Intl](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl).ListFormat，国际化格式化
