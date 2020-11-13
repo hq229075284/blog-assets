@@ -8,17 +8,14 @@ cache:
 # before install: hexo clean
 
 script: 
-  - hexo -v
   - hexo generate
   - cd ./public
   - git init
   - git config user.name "travis script"
   - git add .
   - git commit -m 'Update blog'
-  # - git push -f https://$github_token@$github_repo master:master
-  # - git push -f https://oauth2:$gitee_token@$gitee_repo master:master
-  - echo $PWD
-  - cat index.html
+  - git push -f https://$github_token@$github_repo master:master
+  - git push -f https://oauth2:$gitee_token@$gitee_repo master:master
 
 # deploy:
 #   provider: pages
