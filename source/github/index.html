@@ -1,0 +1,231 @@
+---
+layout: "html"
+---
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
+<style>
+    @keyframes rotate {
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes slideUpFadeIn {
+        0%{
+            opacity: 0;
+            transform: translateY(80px);
+        }
+        100%{
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
+    .loading{
+        text-align: center;
+        padding-top: 20px;
+    }
+    .loading::before{
+        content:'';
+        vertical-align: middle;
+        border:1px solid #bec0c1;
+        width:14px;
+        height:14px;
+        box-sizing: border-box;
+        display: inline-block;
+        border-radius: 50%;
+        border-right-color:transparent;
+        animation: rotate 1s linear infinite both;
+        margin-right: 8px;
+    }
+    .slideUpFadeIn{
+        animation: slideUpFadeIn 0.5s ease-in both;
+    }
+</style>
+<div class="repository-container" style="line-height: 1.5;">
+    <div class="loading">loading...</div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+    <script>
+        let page = 1
+        const pageSize = 20
+        function getList(prevData = []) {
+            return axios({
+                url: `https://api.github.com/users/hq229075284/repos`,
+                method: 'get',
+                params: {
+                    accept: 'application/vnd.github.v3+json',
+                    type: 'all',
+                    sort: 'created',
+                    direction: 'desc',
+                    page: page,
+                    per_page: pageSize,
+                },
+                headers: {
+                    Authorization: 'token 54d01a08ca25980f93ba03ab038b2cc42a80c7c0'
+                }
+            }).then(({ data }) => {
+                prevData = prevData.concat(data)
+                if (prevData.length < page * pageSize) {
+                    return Promise.resolve(prevData)
+                }
+                page += 1
+                return getList(prevData)
+            })
+        }
+
+        function setStyle(dom, styles) {
+            for (let property in styles) {
+                const attribute = styles[property]
+                dom.style[property] = attribute
+            }
+        }
+
+        const classifyMap = {
+            // 最新添加
+            new: {
+                title: '最新添加',
+                list: []
+            },
+            // 维护中
+            maintenance: {
+                title: '维护中',
+                list: []
+            },
+            // fork
+            fork: {
+                title: 'fork',
+                list: []
+            },
+            // other
+            other: {
+                title: '未分类',
+                list: []
+            }
+        }
+
+        function generateContentBySort(data) {
+            const ul = document.createElement('ul')
+            if (data.length === 0) {
+                const div = document.createElement('div')
+                div.textContent = '暂无数据'
+                setStyle(div, {
+                    'text-align': 'center',
+                    padding: '10px'
+                })
+                return div
+            }
+            data.map(one => {
+                const li = document.createElement('li')
+                setStyle(li, {
+                    display: 'inline-block',
+                    width: '33%',
+                    padding: '4px',
+                    'box-sizing': 'border-box',
+                    'word-break': 'break-all',
+                    'vertical-align': 'top',
+                    height: '160px'
+                })
+
+                const a = document.createElement('a')
+                setStyle(a, {
+                    borderRadius: '10px',
+                    backgroundColor: '#fff',
+                    height: '100%',
+                    'box-shadow': '0 0 2px #eceff2',
+                    display: 'block'
+                })
+                a.href = one.html_url
+                a.target = '_blank'
+                li.append(a)
+
+                let div
+                div = document.createElement('div')
+                div.textContent = one.name
+                div.setAttribute('title',one.name)
+                setStyle(div, {
+                    padding: '10px',
+                    'font-size': '24px',
+                    'font-weight': 700,
+                    'border-bottom': '1px solid #eceff2',
+                    'white-space':'nowrap',
+                    'text-overflow': 'ellipsis',
+                    'overflow': 'hidden'
+                })
+                a.append(div)
+
+                div = document.createElement('div')
+                div.textContent = one.description
+                setStyle(div, {
+                    padding: '10px',
+                    'font-size': '14px',
+                    'color': '#585858'
+                })
+                a.append(div)
+
+                ul.append(li)
+            })
+            return ul
+        }
+
+        function isMatch(regList, str) {
+            for (r of regList) {
+                const reg = new RegExp(r)
+                if (reg.test(str)) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        const maintenanceRegs = [
+            'eslint-config',
+            'file-split',
+            'blog',
+            'comet-test',
+            'react-ssr-test',
+            'test-component',
+            'image-view-component',
+            'usualAlgorithm',
+            'about-common-logic',
+            'blog',
+            'blog-assets',
+        ]
+
+        getList().then(data => {
+            classifyMap.new.list = data.splice(0, 6)
+            data.forEach(one => {
+                if (one.fork) {
+                    classifyMap.fork.list.push(one)
+                    return
+                }
+                if (isMatch(maintenanceRegs, one.name)) {
+                    classifyMap.maintenance.list.push(one)
+                    return
+                }
+                classifyMap.other.list.push(one)
+            })
+            $repositoryContainer = document.querySelector('.repository-container')
+            $repositoryContainer.children[0].remove()
+            for (let key in classifyMap) {
+                const h2 = document.createElement('h2')
+                // const a=document.createElement('a')
+                // a.setAttribute('id',key)
+                // a.href="#"+key
+                // a.textContent = classifyMap[key].title+'('+classifyMap[key].list.length+')'
+                // h2.append(a)
+                h2.textContent = classifyMap[key].title+' ('+classifyMap[key].list.length+')'
+                setStyle(h2, {
+                    padding: '10px',
+                    'margin-bottom': '4px',
+                    'border-bottom': '1px solid #eceff2',
+                    'font-size': '24px'
+                })
+                $repositoryContainer.append(h2)
+                const contentHtmlNode = generateContentBySort(classifyMap[key].list)
+                $repositoryContainer.append(contentHtmlNode)
+            }
+            $repositoryContainer.classList.add('slideUpFadeIn')
+        })
+        void 0
+    </script>
+</div>

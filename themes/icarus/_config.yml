@@ -2,6 +2,7 @@
 menu:
   首页: .
   归档: archives
+  GitHub仓库: github
 #   标签: tags
 #   类别: categories
 #   Categories: categories
@@ -23,8 +24,12 @@ customize:
         author_title: Web Developer & Node Developer
         location: HangZhou, China
         follow: https://github.com/hq229075284
+    profileBlackList:
+        - github
     highlight: agate
     sidebar: right # sidebar position, options: left, right or leave it empty
+    sidebarBlackList:
+        - github
     thumbnail: true # enable posts thumbnail, options: true, false
     favicon: # path to favicon
     social_links:

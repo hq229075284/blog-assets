@@ -3,11 +3,11 @@
     <div id="container">
         <%- partial('common/header') %>
         <div class="outer">
-            <% if (theme.customize.profile.enabled) { %>
+            <% if (theme.customize.profile.enabled&&!isMatch(theme.customize.profileBlackList,page.path)) { %>
                 <%- partial('common/profile', null, {cache: !config.relative_link}) %>
             <% } %>
-            <section id="main"><%- body %></section>
-            <% if (theme.customize.sidebar) { %>
+            <section id="main" <%- page.layout==='html'?'style="width: 100%;"':''-%>><%- body %></section>
+            <% if (theme.customize.sidebar&&!isMatch(theme.customize.sidebarBlackList,page.path)) { %>
                 <%- partial('common/sidebar', null, {cache: !config.relative_link}) %>
             <% } %>
         </div>
