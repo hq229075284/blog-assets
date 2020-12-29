@@ -48,6 +48,7 @@ layout: "html"
     <script>
         let page = 1
         const pageSize = 20
+        const token='d85f9ddd27193c6f6030e129fcd3d1f1ed4cd126'
         function getList(prevData = []) {
             return axios({
                 url: `https://api.github.com/users/hq229075284/repos`,
@@ -61,7 +62,7 @@ layout: "html"
                     per_page: pageSize,
                 },
                 headers: {
-                    Authorization: 'token 54d01a08ca25980f93ba03ab038b2cc42a80c7c0'
+                    Authorization: 'token '+token
                 }
             }).then(({ data }) => {
                 prevData = prevData.concat(data)
