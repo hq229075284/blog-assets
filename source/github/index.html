@@ -4,41 +4,47 @@ layout: "html"
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
 <style>
     @keyframes rotate {
-        0%{
+        0% {
             transform: rotate(0deg);
         }
-        100%{
+
+        100% {
             transform: rotate(360deg);
         }
     }
+
     @keyframes slideUpFadeIn {
-        0%{
+        0% {
             opacity: 0;
             transform: translateY(80px);
         }
-        100%{
+
+        100% {
             opacity: 1;
             transform: translateY(0px);
         }
     }
-    .loading{
+
+    .loading {
         text-align: center;
         padding-top: 20px;
     }
-    .loading::before{
-        content:'';
+
+    .loading::before {
+        content: '';
         vertical-align: middle;
-        border:1px solid #bec0c1;
-        width:14px;
-        height:14px;
+        border: 1px solid #bec0c1;
+        width: 14px;
+        height: 14px;
         box-sizing: border-box;
         display: inline-block;
         border-radius: 50%;
-        border-right-color:transparent;
+        border-right-color: transparent;
         animation: rotate 1s linear infinite both;
         margin-right: 8px;
     }
-    .slideUpFadeIn{
+
+    .slideUpFadeIn {
         animation: slideUpFadeIn 0.5s ease-in both;
     }
 </style>
@@ -48,7 +54,7 @@ layout: "html"
     <script>
         let page = 1
         const pageSize = 20
-        const token='d85f9ddd27193c6f6030e129fcd3d1f1ed4cd126'
+        const token = ''
         function getList(prevData = []) {
             return axios({
                 url: `https://api.github.com/users/hq229075284/repos`,
@@ -61,9 +67,9 @@ layout: "html"
                     page: page,
                     per_page: pageSize,
                 },
-                headers: {
-                    Authorization: 'token '+token
-                }
+                // headers: {
+                //     Authorization: 'token '+token
+                // }
             }).then(({ data }) => {
                 prevData = prevData.concat(data)
                 if (prevData.length < page * pageSize) {
@@ -142,13 +148,13 @@ layout: "html"
                 let div
                 div = document.createElement('div')
                 div.textContent = one.name
-                div.setAttribute('title',one.name)
+                div.setAttribute('title', one.name)
                 setStyle(div, {
                     padding: '10px',
                     'font-size': '24px',
                     'font-weight': 700,
                     'border-bottom': '1px solid #eceff2',
-                    'white-space':'nowrap',
+                    'white-space': 'nowrap',
                     'text-overflow': 'ellipsis',
                     'overflow': 'hidden'
                 })
@@ -214,7 +220,7 @@ layout: "html"
                 // a.href="#"+key
                 // a.textContent = classifyMap[key].title+'('+classifyMap[key].list.length+')'
                 // h2.append(a)
-                h2.textContent = classifyMap[key].title+' ('+classifyMap[key].list.length+')'
+                h2.textContent = classifyMap[key].title + ' (' + classifyMap[key].list.length + ')'
                 setStyle(h2, {
                     padding: '10px',
                     'margin-bottom': '4px',
