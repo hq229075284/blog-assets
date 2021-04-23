@@ -1,3 +1,4 @@
+#  travis-ci.org不再使用，现使用travis-ci.com
 language: node_js
 node_js: lts/*
 
