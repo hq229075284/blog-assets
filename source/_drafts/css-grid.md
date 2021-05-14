@@ -5,7 +5,7 @@ categories:
 banner:
 ---
 
-# css-grid
+# css-grid（手机自带浏览器和webview，以及非IE的主流桌面浏览器）
 
 ## 网格
 
