@@ -7,7 +7,7 @@
   },
   "scripts": {
     "_prepare": "hexo clean && hexo generate",
-    "server": "hexo server",
+    "server": "hexo clean && hexo server",
     "deploy": "npm run _prepare && hexo deploy"
   },
   "dependencies": {
@@ -19,7 +19,7 @@
     "hexo-generator-json-content": "^3.0.1",
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.3.0",
-    "hexo-renderer-marked": "^0.3.0",
+    "hexo-renderer-marked": "^3.1.0",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0",
     "uglify-js": "^2.8.29"

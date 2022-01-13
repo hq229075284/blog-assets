@@ -81,3 +81,8 @@ deploy:
   type: git
   repo: git@github.com:hq229075284/blog.git
   branch: master
+
+# Embedding an image using markdown
+marked:
+  prependRoot: true
+  postAsset: true
