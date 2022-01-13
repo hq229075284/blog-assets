@@ -53,23 +53,24 @@ layout: "html"
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
     <script>
         let page = 1
-        const pageSize = 20
-        const token = ''
+        const pageSize = 100
+        const token = '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'
         function getList(prevData = []) {
             return axios({
-                url: `https://api.github.com/users/hq229075284/repos`,
+                url: `https://api.github.com/user/repos`,
                 method: 'get',
                 params: {
                     accept: 'application/vnd.github.v3+json',
-                    type: 'all',
                     sort: 'created',
                     direction: 'desc',
                     page: page,
                     per_page: pageSize,
+                    since:new Date('2010-01-01 00:00:00').toISOString(),
+                    before:new Date().toISOString()
                 },
-                // headers: {
-                //     Authorization: 'token '+token
-                // }
+                headers: {
+                    Authorization: 'token '+token
+                }
             }).then(({ data }) => {
                 prevData = prevData.concat(data)
                 if (prevData.length < page * pageSize) {
@@ -199,7 +200,7 @@ layout: "html"
         ]
 
         getList().then(data => {
-            classifyMap.new.list = data.splice(0, 6)
+            classifyMap.new.list = data.splice(0, 12)
             data.forEach(one => {
                 if (one.fork) {
                     classifyMap.fork.list.push(one)
