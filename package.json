@@ -6,9 +6,13 @@
     "version": "4.2.1"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "_prepare": "hexo clean && hexo generate",
     "server": "hexo clean && hexo server",
     "deploy": "npm run _prepare && hexo deploy"
+  },
+  "problemLink":{
+    "preinstall":"因为hexo的stylus插件依赖的nib依赖的stylus版本太低，导致node14不兼容，参考：https://www.haoyizebo.com/posts/710984d0/"
   },
   "dependencies": {
     "hexo": "^4.0.0",
@@ -20,9 +24,12 @@
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.3.0",
     "hexo-renderer-marked": "^3.1.0",
-    "hexo-renderer-stylus": "^0.3.1",
+    "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^0.2.0",
     "uglify-js": "^2.8.29"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "stylus": "^0.54.8"
+  }
 }
