@@ -1,15 +1,19 @@
 ---
-title: css-grid
-tags:
-categories:
-banner:
+title: Grid
+categories: css
+tags: css
+banner: 'https://s1.ax1x.com/2022/04/15/L8yHat.jpg'
+date: 2022-04-15 16:11:20
 ---
+
 
 # css-grid（手机自带浏览器和webview，以及非IE的主流桌面浏览器）
 
+[demo](https://replit.com/@hq229075284/grid#index.html)
+
 ## 网格
 
-> :warning:  :arrow_down: 以下显式网格、隐式网格暂不考虑溢出的情况
+> ⚠👇 以下显式网格、隐式网格暂不考虑溢出的情况
 
 ### 显式网格
 
